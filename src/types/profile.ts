@@ -1,7 +1,7 @@
 export interface UserProfile {
-  id: number;
-  userId: number;
-  openid: string;
+  id?: number;
+  userId?: number;
+  openid?: string;
   spicyLevel: number;
   preferredTastes: string[];
   dislikedTastes: string[];
@@ -11,10 +11,10 @@ export interface UserProfile {
   preferredCookingTimeMinutes: number;
   preferredDifficulty: 'easy' | 'medium' | 'hard';
   cookingTools: string[];
-  healthGoal: string;
+  healthGoals: string[];
   preferenceSummary: string;
-  totalGenerated: number;
-  totalLiked: number;
-  totalCooked: number;
-  totalSaved: number;
+  totalGenerated?: number;
+  totalLiked?: number;
+  totalCooked?: number;
+  totalSaved?: number;
 }

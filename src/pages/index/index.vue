@@ -46,7 +46,7 @@ const recommendation = useRecommendationStore();
 const freeText = ref('');
 const selectedMoods = ref<string[]>([]);
 const selectedTastes = ref<string[]>([]);
-const selectedTime = ref<string | null>('20分钟');
+const selectedTime = ref<string | null>('20 分钟');
 const selectedTools = ref<string[]>([]);
 
 onShow(async () => {

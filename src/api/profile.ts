@@ -8,7 +8,7 @@ export function getMyProfile() {
   });
 }
 
-export function updateMyProfile(data: UserProfile) {
+export function updateMyProfile(data: Partial<UserProfile>) {
   return request<UserProfile>({
     url: '/api/profile/me',
     method: 'PUT',

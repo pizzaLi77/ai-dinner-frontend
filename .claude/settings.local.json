@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view *)",
+      "Bash(python3 -c \"import sys,json; versions=json.load\\(sys.stdin\\); [print\\(v\\) for v in versions if 'alpha' in v]\")",
+      "Bash(npm install *)",
+      "Read(//d/developSoftware/ideacode/ai-dinner-backend-main/**)",
+      "Read(//d/developSoftware/ideacode/ai-dinner-backend-main/src/main/resources/**)"
+    ]
+  }
+}

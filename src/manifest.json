@@ -1,7 +1,7 @@
 {
-  "name": "AI晚餐决策搭子",
+  "name": "晚餐吃啥小助手",
   "appid": "__UNI__AI_DINNER",
-  "description": "基于 AI 的晚餐决策助手 MVP",
+  "description": "温暖生活化的晚餐决策助手 MVP",
   "versionName": "0.1.0",
   "versionCode": "1",
   "mp-weixin": {

@@ -23,8 +23,12 @@
           <input v-model="cookingToolsText" class="input" placeholder="一口炒锅、电饭锅" />
         </view>
         <view class="field">
+          <view class="label">常用食材</view>
+          <input v-model="commonIngredientsText" class="input" placeholder="鸡蛋、番茄、青菜" />
+        </view>
+        <view class="field">
           <view class="label">健康目标</view>
-          <input v-model="editable.healthGoal" class="input" placeholder="none / low_fat / high_protein" />
+          <input v-model="healthGoalsText" class="input" placeholder="less_oil、high_protein" />
         </view>
       </view>
 
@@ -49,6 +53,8 @@ const editable = reactive<Partial<UserProfile>>({});
 const preferredTastesText = ref('');
 const dislikedIngredientsText = ref('');
 const cookingToolsText = ref('');
+const commonIngredientsText = ref('');
+const healthGoalsText = ref('');
 
 onShow(load);
 
@@ -61,6 +67,8 @@ async function load() {
     preferredTastesText.value = profile.value.preferredTastes.join('、');
     dislikedIngredientsText.value = profile.value.dislikedIngredients.join('、');
     cookingToolsText.value = profile.value.cookingTools.join('、');
+    commonIngredientsText.value = profile.value.commonIngredients.join('、');
+    healthGoalsText.value = profile.value.healthGoals.join('、');
   } catch (error) {
     uni.showToast({ title: (error as Error).message || '读取失败', icon: 'none' });
   } finally {
@@ -80,13 +88,18 @@ async function save() {
   if (!profile.value) return;
   saving.value = true;
   try {
-    const payload = {
-      ...profile.value,
-      ...editable,
+    const payload: Partial<UserProfile> = {
+      spicyLevel: editable.spicyLevel,
+      preferredDifficulty: editable.preferredDifficulty,
+      preferredCookingTimeMinutes: editable.preferredCookingTimeMinutes,
       preferredTastes: splitText(preferredTastesText.value),
       dislikedIngredients: splitText(dislikedIngredientsText.value),
       cookingTools: splitText(cookingToolsText.value),
-    } as UserProfile;
+      commonIngredients: splitText(commonIngredientsText.value),
+      healthGoals: splitText(healthGoalsText.value),
+      dislikedTastes: profile.value.dislikedTastes,
+      favoriteIngredients: profile.value.favoriteIngredients,
+    };
     profile.value = await updateMyProfile(payload);
     user.setProfile(profile.value);
     uni.showToast({ title: '已保存', icon: 'none' });

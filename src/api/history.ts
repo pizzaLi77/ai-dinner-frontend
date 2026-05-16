@@ -1,9 +1,16 @@
 import { request } from './request';
-import type { HistorySession, PageResponse } from '../types/recommendation';
+import type { GenerateDinnerResponse, GroupedHistoryResponse } from '../types/recommendation';
 
-export function getHistory(page = 1, pageSize = 10) {
-  return request<PageResponse<HistorySession>>({
-    url: `/api/history?page=${page}&pageSize=${pageSize}`,
+export function getGroupedHistory(page = 1, pageSize = 10) {
+  return request<GroupedHistoryResponse>({
+    url: `/api/history/grouped?page=${page}&pageSize=${pageSize}`,
     method: 'GET',
+  });
+}
+
+export function generateSimilarFromHistory(sessionId: number) {
+  return request<GenerateDinnerResponse>({
+    url: `/api/history/${sessionId}/similar`,
+    method: 'POST',
   });
 }

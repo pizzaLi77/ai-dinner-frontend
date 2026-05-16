@@ -4,14 +4,14 @@
     <template v-else-if="response">
       <view class="header">
         <view class="title">今晚这 3 个最稳</view>
-        <view class="subtitle">{{ response.profileSummary }}</view>
+        <view class="subtitle">{{ response?.profileSummary }}</view>
       </view>
       <view class="section">
         <RecommendationCard
-          v-for="item in response.recommendations"
+          v-for="item in response?.recommendations || []"
           :key="item.id"
           :item="item"
-          @feedback="(action) => handleFeedback(item.id, response.sessionId, action)"
+          @feedback="(action) => handleFeedback(item, item.sessionId, action)"
         />
       </view>
     </template>
@@ -24,34 +24,46 @@ import { computed } from 'vue';
 import EmptyState from '../../components/EmptyState.vue';
 import LoadingState from '../../components/LoadingState.vue';
 import RecommendationCard from '../../components/RecommendationCard.vue';
-import { submitFeedback } from '../../api/recommendation';
+import { replaceRecommendation, submitFeedback } from '../../api/recommendation';
 import { useRecommendationStore } from '../../stores/recommendation';
 import { useUserStore } from '../../stores/user';
 import type { FeedbackAction } from '../../types/feedback';
+import type { DinnerRecommendation } from '../../types/recommendation';
 
 const recommendation = useRecommendationStore();
 const user = useUserStore();
 const response = computed(() => recommendation.currentResponse);
 
-async function handleFeedback(recommendationId: number, sessionId: number, action: FeedbackAction) {
+async function handleFeedback(item: DinnerRecommendation, sessionId: number, action: FeedbackAction) {
   try {
-    const result = await submitFeedback(recommendationId, sessionId, action);
+    if (action === 'replace') {
+      const next = await replaceRecommendation(item.id, sessionId, item.type);
+      const list = recommendation.currentResponse?.recommendations;
+      const index = list?.findIndex((value) => value.id === item.id) ?? -1;
+      if (list && index >= 0) {
+        list[index] = next;
+      }
+      uni.showToast({ title: '已换一个', icon: 'none' });
+      return;
+    }
+
+    const result = await submitFeedback(item.id, sessionId, action);
     if (user.profile) {
-      user.profile.preferenceSummary = result.updatedProfileSummary;
+      user.profile.preferenceSummary = result.profileSummary;
     }
-    const item = recommendation.currentResponse?.recommendations.find((value) => value.id === recommendationId);
-    if (item) {
-      item.feedbackSummary = {
-        liked: action === 'like' || !!item.feedbackSummary?.liked,
-        disliked: action === 'dislike' || !!item.feedbackSummary?.disliked,
-        saved: action === 'save' ? true : action === 'unsave' ? false : !!item.feedbackSummary?.saved,
-        cooked: action === 'cooked' || !!item.feedbackSummary?.cooked,
-        tooHard: action === 'too_hard' || !!item.feedbackSummary?.tooHard,
-        tooLight: action === 'too_light' || !!item.feedbackSummary?.tooLight,
-        tooOily: action === 'too_oily' || !!item.feedbackSummary?.tooOily,
-      };
-    }
-    uni.showToast({ title: action === 'save' ? '已收藏' : '反馈已保存', icon: 'none' });
+    item.feedbackSummary = {
+      liked: action === 'like' || !!item.feedbackSummary?.liked,
+      disliked: action === 'dislike' || !!item.feedbackSummary?.disliked,
+      saved: action === 'save' ? true : action === 'unsave' ? false : !!item.feedbackSummary?.saved,
+      cooked: action === 'cooked' || !!item.feedbackSummary?.cooked,
+      neutral: action === 'neutral' || !!item.feedbackSummary?.neutral,
+      addToToday: action === 'add_to_today' || !!item.feedbackSummary?.addToToday,
+      tooHard: action === 'too_hard' || !!item.feedbackSummary?.tooHard,
+      tooLight: action === 'too_light' || !!item.feedbackSummary?.tooLight,
+      tooOily: action === 'too_oily' || !!item.feedbackSummary?.tooOily,
+    };
+    const toastTitle = action === 'save' ? '已收藏' : action === 'add_to_today' ? '已加入今日晚餐' : '反馈已保存';
+    uni.showToast({ title: toastTitle, icon: 'none' });
   } catch (error) {
     uni.showToast({ title: (error as Error).message || '反馈保存失败了', icon: 'none' });
   }

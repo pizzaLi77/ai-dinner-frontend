@@ -2,7 +2,7 @@
   <view class="card">
     <view class="card-head">
       <view>
-        <view class="type">{{ TYPE_LABELS[item.type] }}</view>
+        <view class="type" :class="item.type">{{ item.typeLabel || TYPE_LABELS[item.type] }}</view>
         <view class="name">{{ item.name }}</view>
       </view>
       <view class="time">{{ item.estimatedTimeMinutes }} 分钟</view>
@@ -43,13 +43,14 @@
     </view>
 
     <view class="actions">
-      <button @tap="emitFeedback('like')">想吃</button>
-      <button @tap="emitFeedback('dislike')">不想吃</button>
-      <button @tap="emitFeedback('too_hard')">太麻烦</button>
-      <button @tap="emitFeedback('too_light')">太清淡</button>
-      <button @tap="emitFeedback('too_oily')">太油</button>
+      <button :class="{ active: item.feedbackSummary?.liked }" @tap="emitFeedback('like')">喜欢</button>
+      <button :class="{ active: item.feedbackSummary?.neutral }" @tap="emitFeedback('neutral')">一般</button>
+      <button @tap="emitFeedback('replace')">换一个</button>
       <button @tap="emitFeedback(item.feedbackSummary?.saved ? 'unsave' : 'save')">
         {{ item.feedbackSummary?.saved ? '已收藏' : '收藏' }}
+      </button>
+      <button :class="{ active: item.feedbackSummary?.addToToday }" @tap="emitFeedback('add_to_today')">
+        加入今日晚餐
       </button>
       <button @tap="emitFeedback('cooked')">今天做了</button>
     </view>
@@ -96,6 +97,18 @@ function emitFeedback(action: FeedbackAction) {
   color: #1f6f5b;
   font-size: 24rpx;
   font-weight: 700;
+}
+
+.type.easy {
+  color: #a85f2d;
+}
+
+.type.satisfying {
+  color: #9a6a15;
+}
+
+.type.healthy {
+  color: #4f7a57;
 }
 
 .name {
@@ -201,5 +214,11 @@ function emitFeedback(action: FeedbackAction) {
   color: #374151;
   font-size: 24rpx;
   line-height: 58rpx;
+}
+
+.actions button.active {
+  background: #f0d6c0;
+  color: #a85f2d;
+  font-weight: 700;
 }
 </style>

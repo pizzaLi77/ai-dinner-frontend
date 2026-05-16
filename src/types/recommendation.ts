@@ -16,6 +16,8 @@ export interface RecommendationFeedbackSummary {
   disliked: boolean;
   saved: boolean;
   cooked: boolean;
+  neutral: boolean;
+  addToToday: boolean;
   tooHard: boolean;
   tooLight: boolean;
   tooOily: boolean;
@@ -25,6 +27,7 @@ export interface DinnerRecommendation {
   id: number;
   sessionId: number;
   type: 'easy' | 'satisfying' | 'healthy';
+  typeLabel: '最省事' | '最满足' | '最健康';
   name: string;
   reason: string;
   estimatedTimeMinutes: number;
@@ -34,6 +37,7 @@ export interface DinnerRecommendation {
   steps: string[];
   substitutions: string[];
   tags: string[];
+  coverImageUrl?: string | null;
   caution?: string;
   feedbackSummary?: RecommendationFeedbackSummary;
 }
@@ -46,33 +50,56 @@ export interface GenerateDinnerResponse {
 
 export interface FeedbackResponse {
   success: boolean;
-  updatedProfileSummary: string;
+  profileSummary: string;
 }
 
 export interface FavoriteDish {
   id: number;
   recommendationId: number;
+  sourceSessionId: number;
   name: string;
+  summary: string;
   tags: string[];
   estimatedTimeMinutes: number;
   ingredientsUsed: string[];
   steps: string[];
+  coverImageUrl?: string | null;
   createdAt: string;
 }
 
-export interface HistorySession {
-  sessionId: number;
-  freeText: string;
-  selectedMoods: string[];
-  selectedTastes: string[];
-  selectedTime: string;
-  selectedTools: string[];
+export interface TodayDinnerPlanItem {
+  id: number;
+  planDate: string;
+  sourceType: 'favorite' | 'recommendation' | 'manual';
+  sourceId: number;
+  dishName: string;
+  tags: string[];
+  status: 'planned' | 'cooked' | 'cancelled';
   createdAt: string;
-  recommendations: DinnerRecommendation[];
+  updatedAt: string;
+}
+
+export interface HistoryGroupItem {
+  sessionId: number;
+  inputSummary: string;
+  recommendationSummary: string;
+  feedbackSummary: string;
+}
+
+export interface HistoryGroup {
+  dateLabel: string;
+  items: HistoryGroupItem[];
 }
 
 export interface PageResponse<T> {
-  records: T[];
+  items: T[];
+  page: number;
+  pageSize: number;
+  total: number;
+}
+
+export interface GroupedHistoryResponse {
+  groups: HistoryGroup[];
   page: number;
   pageSize: number;
   total: number;

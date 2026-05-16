@@ -25,5 +25,8 @@ export const useRecommendationStore = defineStore('recommendation', {
         this.loading = false;
       }
     },
+    setResponse(response: GenerateDinnerResponse) {
+      this.currentResponse = response;
+    },
   },
 });

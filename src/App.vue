@@ -10,8 +10,8 @@ onLaunch(() => {
 <style>
 page {
   min-height: 100%;
-  background: #f7f4ee;
-  color: #1f2933;
+  background: #f7efe5;
+  color: #2d2925;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -27,15 +27,15 @@ page {
 
 .panel {
   background: #ffffff;
-  border: 1rpx solid rgba(31, 41, 51, 0.08);
+  border: 1rpx solid #d8c9b8;
   border-radius: 16rpx;
   padding: 28rpx;
 }
 
 .primary-button {
   min-height: 92rpx;
-  border-radius: 14rpx;
-  background: #1f6f5b;
+  border-radius: 18rpx;
+  background: #a85f2d;
   color: #ffffff;
   font-size: 32rpx;
   font-weight: 700;
@@ -44,12 +44,12 @@ page {
 .ghost-button {
   min-height: 72rpx;
   border-radius: 12rpx;
-  background: #eef3f0;
-  color: #1f6f5b;
+  background: #fff9f1;
+  color: #a85f2d;
   font-size: 28rpx;
 }
 
 .muted {
-  color: #6b7280;
+  color: #7d746a;
 }
 </style>

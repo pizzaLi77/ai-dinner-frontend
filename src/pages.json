@@ -3,8 +3,8 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "今晚吃啥搭子",
-        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarTitleText": "晚餐吃啥小助手",
+        "navigationBarBackgroundColor": "#f7efe5",
         "navigationBarTextStyle": "black"
       }
     },
@@ -12,7 +12,7 @@
       "path": "pages/result/result",
       "style": {
         "navigationBarTitleText": "今晚 3 个方案",
-        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarBackgroundColor": "#f7efe5",
         "navigationBarTextStyle": "black"
       }
     },
@@ -20,7 +20,7 @@
       "path": "pages/profile/profile",
       "style": {
         "navigationBarTitleText": "我的口味",
-        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarBackgroundColor": "#f7efe5",
         "navigationBarTextStyle": "black"
       }
     },
@@ -28,7 +28,7 @@
       "path": "pages/favorites/favorites",
       "style": {
         "navigationBarTitleText": "收藏",
-        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarBackgroundColor": "#f7efe5",
         "navigationBarTextStyle": "black"
       }
     },
@@ -36,15 +36,15 @@
       "path": "pages/history/history",
       "style": {
         "navigationBarTitleText": "历史",
-        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarBackgroundColor": "#f7efe5",
         "navigationBarTextStyle": "black"
       }
     }
   ],
   "tabBar": {
     "color": "#6b7280",
-    "selectedColor": "#1f6f5b",
-    "backgroundColor": "#ffffff",
+    "selectedColor": "#a85f2d",
+    "backgroundColor": "#fff9f1",
     "borderStyle": "white",
     "list": [
       { "pagePath": "pages/index/index", "text": "首页" },
