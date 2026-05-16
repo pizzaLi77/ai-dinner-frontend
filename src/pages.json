@@ -1,0 +1,56 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "今晚吃啥搭子",
+        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/result/result",
+      "style": {
+        "navigationBarTitleText": "今晚 3 个方案",
+        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": {
+        "navigationBarTitleText": "我的口味",
+        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/favorites/favorites",
+      "style": {
+        "navigationBarTitleText": "收藏",
+        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/history/history",
+      "style": {
+        "navigationBarTitleText": "历史",
+        "navigationBarBackgroundColor": "#f7f4ee",
+        "navigationBarTextStyle": "black"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#6b7280",
+    "selectedColor": "#1f6f5b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/favorites/favorites", "text": "收藏" },
+      { "pagePath": "pages/history/history", "text": "历史" },
+      { "pagePath": "pages/profile/profile", "text": "我的" }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "AI晚餐决策搭子",
+  "appid": "__UNI__AI_DINNER",
+  "description": "基于 AI 的晚餐决策助手 MVP",
+  "versionName": "0.1.0",
+  "versionCode": "1",
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  },
+  "h5": {
+    "devServer": {
+      "port": 5173
+    }
+  }
+}
