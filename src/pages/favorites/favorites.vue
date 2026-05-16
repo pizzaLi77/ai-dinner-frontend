@@ -63,7 +63,7 @@ async function load() {
   try {
     await user.ensureLogin();
     const tag = activeTag.value === '全部' ? '' : activeTag.value;
-    items.value = (await getFavorites(tag)).items;
+    items.value = (await getFavorites(tag)).records;
   } catch (error) {
     uni.showToast({ title: (error as Error).message || '读取收藏失败', icon: 'none' });
   } finally {

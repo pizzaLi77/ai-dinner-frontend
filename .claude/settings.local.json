@@ -5,7 +5,10 @@
       "Bash(python3 -c \"import sys,json; versions=json.load\\(sys.stdin\\); [print\\(v\\) for v in versions if 'alpha' in v]\")",
       "Bash(npm install *)",
       "Read(//d/developSoftware/ideacode/ai-dinner-backend-main/**)",
-      "Read(//d/developSoftware/ideacode/ai-dinner-backend-main/src/main/resources/**)"
+      "Read(//d/developSoftware/ideacode/ai-dinner-backend-main/src/main/resources/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/api/health)",
+      "Bash(curl -s -I -X OPTIONS -H \"Origin: http://localhost:5173\" -H \"Access-Control-Request-Method: POST\" http://localhost:8080/api/auth/wechat/login)",
+      "Bash(curl *)"
     ]
   }
 }

@@ -92,7 +92,7 @@ export interface HistoryGroup {
 }
 
 export interface PageResponse<T> {
-  items: T[];
+  records: T[];
   page: number;
   pageSize: number;
   total: number;
