@@ -1,4 +1,5 @@
 <template>
+<!--view标签是uni-app约定的，实际上与div标签等同意思，为了兼容多端因此使用view标签  -->
   <view class="page">
     <view class="title">今晚想吃点什么？</view>
     <view class="summary panel">
